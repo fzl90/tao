@@ -25,7 +25,7 @@
     </context:component-scan>
 
     <beans:bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <beans:property name="prefix" value="/WEB-INF/jsp/"/>
+        <beans:property name="prefix" value="/WEB-INF/page/"/>
         <beans:property name="suffix" value=".jsp"/>
     </beans:bean>
 

@@ -10,7 +10,7 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            /WEB-INF/spring/spring-context.xml
+            /WEB-INF/spring/application-context.xml
         </param-value>
     </context-param>
 
@@ -46,22 +46,12 @@
 
     <filter>
         <filter-name>WebSecurityFilter</filter-name>
-        <filter-class>me.ele.sargeras.mgt.framework.filter.WebSecurityFilter</filter-class>
+        <filter-class>com.wiyar.tao.framework.WebAPISecurityFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>WebSecurityFilter</filter-name>
-        <url-pattern>/sargeras-webapi/*</url-pattern>
+        <url-pattern>*</url-pattern>
     </filter-mapping>
-
-    <filter>
-        <filter-name>MgtWebSecurityFilter</filter-name>
-        <filter-class>me.ele.sargeras.mgt.framework.filter.MgtWebSecurityFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>MgtWebSecurityFilter</filter-name>
-        <url-pattern>/sargeras-manage-webapi/*</url-pattern>
-    </filter-mapping>
-
 
     <session-config>
         <session-timeout>30</session-timeout>
