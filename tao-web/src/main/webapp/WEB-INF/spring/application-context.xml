@@ -14,7 +14,8 @@
 
     <bean id="webapi_security" class="com.wiyar.tao.framework.WebAPISecurityFilter"/>
 
-
+    <!-- 支持上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">

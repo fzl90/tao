@@ -8,12 +8,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title>nanuku</title>
+    <link href="http://localhost:8080/favicon.ico" rel="SHORTCUT ICON">
 </head>
 <body>
 
 
-    <img  src="http://www.pptbz.com/pptpic/uploadfiles_6909/201202/2012022917310499.jpg">
+    <div style="text-align:center;"><img width="1200"  src="WechatIMG1.jpeg"></div>
 
 </body>
 </html>

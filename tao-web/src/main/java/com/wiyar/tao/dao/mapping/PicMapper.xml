@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wiyar.tao.dao.mapping.PicMapper">
+    <resultMap id="BaseResultMap" type="com.wiyar.tao.dao.model.Pic">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="category" property="category" jdbcType="INTEGER"/>
+        <result column="sub_category" property="subCategory" jdbcType="INTEGER"/>
+        <result column="width" property="width" jdbcType="BIGINT"/>
+        <result column="height" property="height" jdbcType="BIGINT"/>
+        <result column="diy_time" property="diyTime" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="is_active" property="isActive" jdbcType="TINYINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, name, url,category,sub_category,width,height,diy_time,remark,is_active,create_time,update_time
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select
+        <include refid="Base_Column_List" />
+        from pic
+        where id = #{id,jdbcType=BIGINT} and is_active = 1
+    </select>
+
+    <insert id="insertSelective" parameterType="com.wiyar.tao.dao.model.Pic" >
+        insert into pic
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="url != null" >
+                url,
+            </if>
+            <if test="category != null" >
+                category,
+            </if>
+            <if test="subCategory != null" >
+                sub_category,
+            </if>
+            <if test="width != null" >
+                width,
+            </if>
+            <if test="height != null" >
+                height,
+            </if>
+            <if test="diyTime != null" >
+                diy_time,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="isActive != null" >
+                is_active,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null" >
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="category != null" >
+                #{category,jdbcType=INTEGER},
+            </if>
+            <if test="subCategory != null" >
+                #{subCategory,jdbcType=INTEGER},
+            </if>
+            <if test="width != null" >
+                #{width,jdbcType=BIGINT},
+            </if>
+            <if test="height != null" >
+                #{height,jdbcType=BIGINT},
+            </if>
+            <if test="diyTime != null" >
+                #{diyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isActive != null" >
+                #{is_active,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <!--<update id="updateByPrimaryKeySelective" parameterType="me.ele.sargeras.uc.server.repository.model.Retailer" >-->
+        <!--update u_retailer-->
+        <!--<set >-->
+            <!--<if test="retailerId != null" >-->
+                <!--retailer_id = #{retailerId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="accountId != null" >-->
+                <!--account_id = #{accountId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="registerTime != null" >-->
+                <!--register_time = #{registerTime,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="accountName != null" >-->
+                <!--account_name = #{accountName,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="retailerType != null" >-->
+                <!--retailer_type = #{retailerType,jdbcType=TINYINT},-->
+            <!--</if>-->
+            <!--<if test="walleId != null" >-->
+                <!--walle_id = #{walleId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="verifyStatus != null" >-->
+                <!--verify_status = #{verifyStatus,jdbcType=TINYINT},-->
+            <!--</if>-->
+            <!--<if test="blackStatus != null" >-->
+                <!--black_status = #{blackStatus,jdbcType=TINYINT},-->
+            <!--</if>-->
+            <!--<if test="productId != null" >-->
+                <!--product_id = #{productId,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="retailerName != null" >-->
+                <!--retailer_name = #{retailerName,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="retailerCategory != null" >-->
+                <!--retailer_category = #{retailerCategory,jdbcType=TINYINT},-->
+            <!--</if>-->
+            <!--<if test="retailerPhone != null" >-->
+                <!--retailer_phone = #{retailerPhone,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="bindingPhone != null" >-->
+                <!--binding_phone = #{bindingPhone,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="cityId != null" >-->
+                <!--city_id = #{cityId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="cityName != null" >-->
+                <!--city_name = #{cityName,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="retailerPoiAddress != null" >-->
+                <!--retailer_poi_address = #{retailerPoiAddress,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="retailerExtraAddress != null" >-->
+                <!--retailer_extra_address = #{retailerExtraAddress,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="retailerLongitude != null" >-->
+                <!--retailer_longitude = #{retailerLongitude,jdbcType=DECIMAL},-->
+            <!--</if>-->
+            <!--<if test="retailerLatitude != null" >-->
+                <!--retailer_latitude = #{retailerLatitude,jdbcType=DECIMAL},-->
+            <!--</if>-->
+            <!--<if test="retailerOwnerName != null" >-->
+                <!--retailer_owner_name = #{retailerOwnerName,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="retailerOwnerIdNum != null" >-->
+                <!--retailer_owner_id_num = #{retailerOwnerIdNum,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="retailerOwnerIdPic != null" >-->
+                <!--retailer_owner_id_pic = #{retailerOwnerIdPic,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="retailerOwnerIdPicHash != null" >-->
+                <!--retailer_owner_id_pic_hash = #{retailerOwnerIdPicHash,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="businessLicencePic != null" >-->
+                <!--business_licence_pic = #{businessLicencePic,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="businessLicencePicHash != null" >-->
+                <!--business_licence_pic_hash = #{businessLicencePicHash,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="serviceLicensePic != null" >-->
+                <!--service_license_pic = #{serviceLicensePic,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="serviceLicensePicHash != null" >-->
+                <!--service_license_pic_hash = #{serviceLicensePicHash,jdbcType=VARCHAR},-->
+            <!--</if>-->
+            <!--<if test="verifyId != null" >-->
+                <!--verify_id = #{verifyId,jdbcType=BIGINT},-->
+            <!--</if>-->
+            <!--<if test="isSmsNotify != null" >-->
+                <!--is_sms_notify = #{isSmsNotify,jdbcType=TINYINT},-->
+            <!--</if>-->
+            <!--<if test="isActive != null" >-->
+                <!--is_active = #{isActive,jdbcType=TINYINT},-->
+            <!--</if>-->
+            <!--<if test="createdAt != null" >-->
+                <!--created_at = #{createdAt,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+            <!--<if test="updatedAt != null" >-->
+                <!--updated_at = #{updatedAt,jdbcType=TIMESTAMP},-->
+            <!--</if>-->
+        <!--</set>-->
+        <!--where id = #{id,jdbcType=BIGINT} and is_active = 1-->
+    <!--</update>-->
+
+
+</mapper>
