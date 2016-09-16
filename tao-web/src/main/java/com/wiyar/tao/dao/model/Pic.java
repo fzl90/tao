@@ -18,7 +18,7 @@ public class Pic {
     private String remark;
     private Timestamp createTime;
     private Timestamp updateTime;
-    private Integer is_active;
+    private Integer isActive;
 
     @Override
     public String toString() {
@@ -34,7 +34,7 @@ public class Pic {
         sb.append(", remark='").append(remark).append('\'');
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
-        sb.append(", is_active=").append(is_active);
+        sb.append(", isActive=").append(isActive);
         sb.append('}');
         return sb.toString();
     }
@@ -127,11 +127,11 @@ public class Pic {
         this.updateTime = updateTime;
     }
 
-    public Integer getIs_active() {
-        return is_active;
+    public Integer getIsActive() {
+        return isActive;
     }
 
-    public void setIs_active(Integer is_active) {
-        this.is_active = is_active;
+    public void setIsActive(Integer isActive) {
+        this.isActive = isActive;
     }
 }

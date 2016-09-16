@@ -39,11 +39,11 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:com/wiyar/tao/dao/**/mapping/*Mapper.xml"/>
-        <property name="typeAliasesPackage" value="com.wiyar.tao.dao.*.model"/>
+        <property name="typeAliasesPackage" value="com.wiyar.tao.dao.model"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.wiyar.tao.dao.*.mapping"/>
+        <property name="basePackage" value="com.wiyar.tao.dao.mapping"/>
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
