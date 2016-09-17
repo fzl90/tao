@@ -50,10 +50,6 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
 
-            <div class="alert alert-success alert-dismissable" hidden="hidden">
-                <strong>Warning!</strong> Best check yo self, you're not looking too good.
-            </div>
-
             <button type="button" class="btn btn-success btn-sm active btn-block" onclick="gotoAdd()">添加</button>
             <br>
 
@@ -64,9 +60,9 @@
                             <div class="thumbnail">
                                 <img alt="300x200" src="/pic/<c:out value="${pic.url}" default=""/>" />
                                 <div class="caption">
-                                    <h3>
+                                    <h4>
                                         <c:out value="${pic.name}" default=""/>
-                                    </h3>
+                                    </h4>
                                     <p>
                                         <c:out value="${pic.remark}" default=""/>
                                     </p>

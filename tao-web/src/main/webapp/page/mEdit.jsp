@@ -41,7 +41,7 @@
             }, 1000);
         }
 
-        function edit() {
+        function editPic() {
             $("#editForm").ajaxSubmit({
                 type: 'post',
                 url: '/manage/edit',
@@ -81,7 +81,8 @@
             <button type="button" class="btn btn-success btn-sm active btn-block" onclick="gotoMindex()">返回首页</button>
             <br>
 
-            <form role="form" action="/manage/add" method="post" id="addForm">
+            <form role="form" action="/manage/edit" method="post" id="editForm">
+                <input hidden="hidden" name="id" value="<c:out value="${pic.id}"/>">
                 <div class="form-group">
                     <label for="nameInput">名称</label>
                     <input type="text" name="name" class="form-control" id="nameInput"
@@ -90,7 +91,7 @@
                 <div class="form-group">
                     <label for="remarkInput">备注</label>
                     <input type="text" name="remark" class="form-control" id="remarkInput"
-                           value="<c:out value="${pic.name}"/>"/>
+                           value="<c:out value="${pic.remark}"/>"/>
                 </div>
 
                 <div class="form-group">
@@ -118,13 +119,13 @@
                 <div class="form-group">
                     <label for="diyTimeInput">创作时间</label>
                     <input type="text" name="diyTimeStr" class="form-control" id="diyTimeInput"
-                           value="<c:out value="${pic.diyTime}"/> "/>
+                           value="<c:out value="${pic.diyTimeStr}"/>"/>
                 </div>
 
             </form>
 
             <div class="form-group" style="text-align: center">
-                <button type="button" class="btn btn-success active btn-default" onclick="add()">提交</button>
+                <button type="button" class="btn btn-success active btn-default" onclick="editPic()">提交</button>
             </div>
 
             <div style="text-align:center;"><img id="newImage" width="1150" class="img-thumbnail" src="/pic/<c:out value="${pic.url}"/>"></div>

@@ -14,6 +14,8 @@ public interface PicMapper {
 
     void insertSelective(Pic pic);
 
+    void updateByPrimaryKeySelective(Pic pic);
+
     List<Pic> selectAll();
 
     void deleteByPrimaryKey(Long id);

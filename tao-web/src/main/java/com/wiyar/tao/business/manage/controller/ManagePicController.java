@@ -1,17 +1,17 @@
 package com.wiyar.tao.business.manage.controller;
 
-import com.wiyar.tao.business.manage.dto.PicAddReqDto;
-import com.wiyar.tao.business.manage.param.PicAddParam;
+import com.wiyar.tao.business.manage.dto.PicReqDto;
+import com.wiyar.tao.business.manage.param.PicParam;
 import com.wiyar.tao.business.manage.service.ManagePicService;
 import com.wiyar.tao.dao.model.Pic;
 import com.wiyar.tao.framework.ResponseEntity;
 import com.wiyar.tao.framework.WebApiBaseController;
 import com.wiyar.tao.util.CollectionUtil;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -53,9 +53,57 @@ public class ManagePicController extends WebApiBaseController {
 
         Map<String, Object> params = new HashMap<String, Object>();
         Pic pic = this.managePicService.getPicById(id);
-        params.put("pic",pic);
+
+        PicParam picParam = new PicParam();
+        BeanUtils.copyProperties(pic,picParam);
+
+        picParam.setDiyTimeStr(DateFormatUtils.format(new Timestamp(pic.getDiyTime().getTime()),"yyyy/MM/dd HH:mm"));
+
+        params.put("pic",picParam);
 
         return new ModelAndView("mEdit", params);
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<?> addPic(PicParam param) throws Exception {
+
+        PicReqDto dto = new PicReqDto();
+        BeanUtils.copyProperties(param, dto);
+
+        Date date = DateUtils.parseDate(param.getDiyTimeStr(), "yyyy/MM/dd HH:mm");
+        dto.setDiyTime(new Timestamp(date.getTime()));
+
+        managePicService.addPic(dto);
+
+        return null;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<?> editPic(PicParam param) throws Exception {
+
+        PicReqDto dto = new PicReqDto();
+        BeanUtils.copyProperties(param, dto);
+
+        Date date = DateUtils.parseDate(param.getDiyTimeStr(), "yyyy/MM/dd HH:mm");
+        dto.setDiyTime(new Timestamp(date.getTime()));
+
+        managePicService.editPic(dto);
+
+        return null;
+    }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<?> removePic(@RequestParam(value = "id") Long id) throws Exception {
+
+        managePicService.removePic(id);
+
+        return null;
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
@@ -82,32 +130,5 @@ public class ManagePicController extends WebApiBaseController {
         }
         return ResponseEntity.success(targetFileName);
     }
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ResponseEntity<?> addPic(PicAddParam param) throws Exception {
-
-        PicAddReqDto dto = new PicAddReqDto();
-        BeanUtils.copyProperties(param, dto);
-
-        Date date = DateUtils.parseDate(param.getDiyTimeStr(), "yyyy/MM/dd HH:mm");
-        dto.setDiyTime(new Timestamp(date.getTime()));
-
-        managePicService.addPic(dto);
-
-        return null;
-    }
-
-    @RequestMapping(value = "/remove", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    ResponseEntity<?> removePic(@RequestParam(value = "id") Long id) throws Exception {
-
-        managePicService.removePic(id);
-
-        return null;
-    }
-
 
 }

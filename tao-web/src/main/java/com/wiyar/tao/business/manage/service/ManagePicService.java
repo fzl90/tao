@@ -1,6 +1,6 @@
 package com.wiyar.tao.business.manage.service;
 
-import com.wiyar.tao.business.manage.dto.PicAddReqDto;
+import com.wiyar.tao.business.manage.dto.PicReqDto;
 import com.wiyar.tao.dao.model.Pic;
 
 import java.util.List;
@@ -12,7 +12,9 @@ public interface ManagePicService {
 
     List<Pic> getAllPicList() throws Exception;
 
-    void addPic(PicAddReqDto dto) throws Exception;
+    void addPic(PicReqDto dto) throws Exception;
+
+    void editPic(PicReqDto dto) throws Exception;
 
     void removePic(Long id) throws Exception;
 

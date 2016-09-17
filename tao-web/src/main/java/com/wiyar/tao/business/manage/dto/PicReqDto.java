@@ -5,8 +5,9 @@ import java.sql.Timestamp;
 /**
  * Created by fuzhenglong on 16/9/16.
  */
-public class PicAddReqDto {
+public class PicReqDto {
 
+    private Long id;
     private String name;
     private String url;
     private Integer category;
@@ -16,8 +17,9 @@ public class PicAddReqDto {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("PicAddReqDto{");
-        sb.append("name='").append(name).append('\'');
+        final StringBuilder sb = new StringBuilder("PicReqDto{");
+        sb.append("id=").append(id);
+        sb.append(", name='").append(name).append('\'');
         sb.append(", url='").append(url).append('\'');
         sb.append(", category=").append(category);
         sb.append(", subCategory=").append(subCategory);
@@ -25,6 +27,14 @@ public class PicAddReqDto {
         sb.append(", remark='").append(remark).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
