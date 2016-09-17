@@ -1,5 +1,8 @@
 package com.wiyar.tao.business.manage.controller;
 
+import com.wiyar.tao.business.constant.Category;
+import com.wiyar.tao.business.constant.CategoryConstant;
+import com.wiyar.tao.business.constant.SubCategory;
 import com.wiyar.tao.business.manage.dto.PicReqDto;
 import com.wiyar.tao.business.manage.param.PicParam;
 import com.wiyar.tao.business.manage.service.ManagePicService;
@@ -44,8 +47,17 @@ public class ManagePicController extends WebApiBaseController {
     }
 
     @RequestMapping(value = "/goto/add", method = RequestMethod.GET)
-    public String gotoAdd() {
-        return "mAdd";
+    public ModelAndView gotoAdd() {
+
+        Map<String, Object> params = new HashMap<String, Object>();
+
+        //获取类别和子类别
+        List<Category> categories = CategoryConstant.getCategories();
+        List<SubCategory> subCategories = CategoryConstant.getSubCategories(1);
+        params.put("categories", categories);
+        params.put("subCategories", subCategories);
+
+        return new ModelAndView("mAdd", params);
     }
 
     @RequestMapping(value = "/goto/edit", method = RequestMethod.GET)
@@ -55,11 +67,17 @@ public class ManagePicController extends WebApiBaseController {
         Pic pic = this.managePicService.getPicById(id);
 
         PicParam picParam = new PicParam();
-        BeanUtils.copyProperties(pic,picParam);
+        BeanUtils.copyProperties(pic, picParam);
 
-        picParam.setDiyTimeStr(DateFormatUtils.format(new Timestamp(pic.getDiyTime().getTime()),"yyyy/MM/dd HH:mm"));
+        picParam.setDiyTimeStr(DateFormatUtils.format(new Timestamp(pic.getDiyTime().getTime()), "yyyy/MM/dd HH:mm"));
 
-        params.put("pic",picParam);
+        //获取类别和子类别
+        List<Category> categories = CategoryConstant.getCategories();
+        List<SubCategory> subCategories = CategoryConstant.getSubCategories(pic.getCategory());
+        params.put("categories", categories);
+        params.put("subCategories", subCategories);
+
+        params.put("pic", picParam);
 
         return new ModelAndView("mEdit", params);
     }

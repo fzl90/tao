@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: fzl
@@ -116,22 +117,19 @@
                 <div class="form-group">
                     <label for="categorySelect">类别</label>
                     <select class="form-control" name="category" id="categorySelect">
-                        <option value="1"></option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <c:forEach var="category" items="${categories}">
+                            <option value="<c:out value="${category.id}"/>"><c:out value="${category.name}"/></option>
+                        </c:forEach>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="subCategorySelect">子类别</label>
                     <select class="form-control" name="subCategory" id="subCategorySelect">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <c:forEach var="subCategory" items="${subCategories}">
+                            <option value="<c:out value="${subCategory.id}"/>"><c:out
+                                    value="${subCategory.name}"/></option>
+                        </c:forEach>
                     </select>
                 </div>
 
