@@ -27,6 +27,13 @@
         where id = #{id,jdbcType=BIGINT} and is_active = 1
     </select>
 
+    <select id="selectAll" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List" />
+        from pic
+        where is_active = 1 order by id desc
+    </select>
+
     <insert id="insertSelective" parameterType="com.wiyar.tao.dao.model.Pic" >
         insert into pic
         <trim prefix="(" suffix=")" suffixOverrides="," >
