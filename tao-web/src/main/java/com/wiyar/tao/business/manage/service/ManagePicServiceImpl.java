@@ -13,7 +13,7 @@ import java.util.List;
  * Created by fuzhenglong on 16/9/16.
  */
 @Service
-public class ManagePicServiceImpl implements  ManagePicService {
+public class ManagePicServiceImpl implements ManagePicService {
 
     @Autowired
     private PicMapper picMapper;
@@ -25,10 +25,18 @@ public class ManagePicServiceImpl implements  ManagePicService {
 
     @Override
     public void addPic(PicAddReqDto dto) throws Exception {
-
         Pic pic = new Pic();
-
-        BeanUtils.copyProperties(dto,pic);
+        BeanUtils.copyProperties(dto, pic);
         picMapper.insertSelective(pic);
+    }
+
+    @Override
+    public void removePic(Long id) throws Exception {
+        picMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Pic getPicById(Long id) throws Exception {
+        return picMapper.selectByPrimaryKey(id);
     }
 }

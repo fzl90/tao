@@ -27,6 +27,11 @@
         where id = #{id,jdbcType=BIGINT} and is_active = 1
     </select>
 
+    <select id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        update pic set is_active = 0
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
     <select id="selectAll" resultMap="BaseResultMap" >
         select
         <include refid="Base_Column_List" />

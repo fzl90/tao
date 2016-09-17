@@ -11,17 +11,17 @@ public class PicAddParam {
     private String url;
     private Integer category;
     private Integer subCategory;
-    private Long diyTime;
+    private String diyTimeStr;
     private String remark;
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("PicAddParm{");
+        final StringBuilder sb = new StringBuilder("PicAddParam{");
         sb.append("name='").append(name).append('\'');
         sb.append(", url='").append(url).append('\'');
         sb.append(", category=").append(category);
         sb.append(", subCategory=").append(subCategory);
-        sb.append(", diyTime=").append(diyTime);
+        sb.append(", diyTimeStr='").append(diyTimeStr).append('\'');
         sb.append(", remark='").append(remark).append('\'');
         sb.append('}');
         return sb.toString();
@@ -59,12 +59,12 @@ public class PicAddParam {
         this.subCategory = subCategory;
     }
 
-    public Long getDiyTime() {
-        return diyTime;
+    public String getDiyTimeStr() {
+        return diyTimeStr;
     }
 
-    public void setDiyTime(Long diyTime) {
-        this.diyTime = diyTime;
+    public void setDiyTimeStr(String diyTimeStr) {
+        this.diyTimeStr = diyTimeStr;
     }
 
     public String getRemark() {

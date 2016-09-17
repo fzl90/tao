@@ -16,15 +16,26 @@
 
     <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <script  src="<%=request.getContextPath() %>/js/jquery/jquery-1.7.2.min.js"></script>
-    <script src="<%=request.getContextPath() %>/js/jquery/jquery.form.js"></script>
-    <script  src="<%=request.getContextPath() %>/js/jquery/jquery-datePicker.js"></script>
+    <script  src="<%=request.getContextPath() %>/jquery/jquery-1.7.2.min.js"></script>
+    <script src="<%=request.getContextPath() %>/jquery/jquery.form.js"></script>
     <script src="<%=request.getContextPath() %>/bootstrap/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
-        function test(id) {
-            alert(id);
 
+        function gotoAdd() {
+            window.location.href="manage/goto/add";
+        }
+
+        function removePic(id) {
+            $.post('/manage/remove', {
+                id : id
+            }, function(data) {
+                window.location.href="<%=request.getContextPath() %>/manage";
+            });
+        }
+
+        function gotoEdit(id) {
+            window.location.href="manage/goto/edit?id="+id;
         }
 
     </script>
@@ -33,6 +44,7 @@
 
 <body>
 
+<br>
 
 <div class="container">
     <div class="row clearfix">
@@ -42,7 +54,7 @@
                 <strong>Warning!</strong> Best check yo self, you're not looking too good.
             </div>
 
-            <button type="button" class="btn btn-success btn-sm active btn-block">添加</button>
+            <button type="button" class="btn btn-success btn-sm active btn-block" onclick="gotoAdd()">添加</button>
             <br>
 
             <c:forEach var="subList" items="${picList}" >
@@ -59,7 +71,8 @@
                                         <c:out value="${pic.remark}" default=""/>
                                     </p>
                                     <p>
-                                        <a class="btn btn-primary" href="#" onclick="test()">删除</a> <a class="btn" href="#">Action</a>
+                                        <button type="button" class="btn btn-link btn-xs" onclick="gotoEdit(<c:out value="${pic.id}"/>)">修改</button>
+                                        <button type="button" class="btn btn-link btn-xs" onclick="removePic(<c:out value="${pic.id}"/>)">删除</button>
                                     </p>
                                 </div>
                             </div>

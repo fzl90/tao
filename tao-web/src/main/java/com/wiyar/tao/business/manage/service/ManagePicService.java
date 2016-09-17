@@ -14,5 +14,9 @@ public interface ManagePicService {
 
     void addPic(PicAddReqDto dto) throws Exception;
 
+    void removePic(Long id) throws Exception;
+
+    Pic getPicById(Long id) throws Exception;
+
 
 }

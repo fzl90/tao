@@ -1,5 +1,7 @@
 package com.wiyar.tao.business.manage.dto;
 
+import java.sql.Timestamp;
+
 /**
  * Created by fuzhenglong on 16/9/16.
  */
@@ -9,7 +11,7 @@ public class PicAddReqDto {
     private String url;
     private Integer category;
     private Integer subCategory;
-    private Long diyTime;
+    private Timestamp diyTime;
     private String remark;
 
     @Override
@@ -57,11 +59,11 @@ public class PicAddReqDto {
         this.subCategory = subCategory;
     }
 
-    public Long getDiyTime() {
+    public Timestamp getDiyTime() {
         return diyTime;
     }
 
-    public void setDiyTime(Long diyTime) {
+    public void setDiyTime(Timestamp diyTime) {
         this.diyTime = diyTime;
     }
 

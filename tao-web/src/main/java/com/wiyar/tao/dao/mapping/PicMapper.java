@@ -1,6 +1,7 @@
 package com.wiyar.tao.dao.mapping;
 
 import com.wiyar.tao.dao.model.Pic;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,5 +15,7 @@ public interface PicMapper {
     void insertSelective(Pic pic);
 
     List<Pic> selectAll();
+
+    void deleteByPrimaryKey(Long id);
 
 }

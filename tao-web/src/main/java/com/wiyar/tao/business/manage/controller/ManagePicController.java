@@ -1,6 +1,5 @@
 package com.wiyar.tao.business.manage.controller;
 
-import com.sun.xml.internal.xsom.impl.scd.Iterators;
 import com.wiyar.tao.business.manage.dto.PicAddReqDto;
 import com.wiyar.tao.business.manage.param.PicAddParam;
 import com.wiyar.tao.business.manage.service.ManagePicService;
@@ -8,6 +7,7 @@ import com.wiyar.tao.dao.model.Pic;
 import com.wiyar.tao.framework.ResponseEntity;
 import com.wiyar.tao.framework.WebApiBaseController;
 import com.wiyar.tao.util.CollectionUtil;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.sql.Timestamp;
+import java.util.*;
 
 /**
  * Created by fuzhenglong on 16/9/16.
@@ -37,33 +35,36 @@ public class ManagePicController extends WebApiBaseController {
     private ManagePicService managePicService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ModelAndView gotoManage() throws Exception{
+    public ModelAndView gotoManage() throws Exception {
         Map<String, Object> params = new HashMap<String, Object>();
-
         List<Pic> list = this.managePicService.getAllPicList();
-
-
-        List<List<Pic>> picList = CollectionUtil.split(list,3);
-
+        List<List<Pic>> picList = CollectionUtil.split(list, 3);
         params.put("picList", picList);
         return new ModelAndView("mIndex", params);
     }
 
-    @RequestMapping(value = "test", method = RequestMethod.GET)
-    public String gotoTest() {
-        return "testBootstrap";
+    @RequestMapping(value = "/goto/add", method = RequestMethod.GET)
+    public String gotoAdd() {
+        return "mAdd";
     }
 
+    @RequestMapping(value = "/goto/edit", method = RequestMethod.GET)
+    public ModelAndView gotoEdit(@RequestParam(value = "id") Long id) throws Exception {
+
+        Map<String, Object> params = new HashMap<String, Object>();
+        Pic pic = this.managePicService.getPicById(id);
+        params.put("pic",pic);
+
+        return new ModelAndView("mEdit", params);
+    }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public
     @ResponseBody
-    ResponseEntity<?> fileUpload(@RequestParam(value = "pic", required = false) MultipartFile file, HttpServletRequest request, ModelMap model) throws Exception {
+    ResponseEntity<?> fileUpload(@RequestParam(value = "pic", required = false) MultipartFile file, HttpServletRequest request) throws Exception {
 
         String path = request.getSession().getServletContext().getRealPath("pic");
         String fileName = file.getOriginalFilename();
-
-
         String suffix = fileName.substring(fileName.lastIndexOf("."));
         String uuid = UUID.randomUUID().toString();
         String targetFileName = uuid + suffix;
@@ -79,20 +80,33 @@ public class ManagePicController extends WebApiBaseController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //model.addAttribute("fileUrl", request.getContextPath()+"/pic/"+fileName);
-
         return ResponseEntity.success(targetFileName);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public ResponseEntity<?> addPic(PicAddParam param) throws Exception {
+    public
+    @ResponseBody
+    ResponseEntity<?> addPic(PicAddParam param) throws Exception {
 
         PicAddReqDto dto = new PicAddReqDto();
         BeanUtils.copyProperties(param, dto);
 
+        Date date = DateUtils.parseDate(param.getDiyTimeStr(), "yyyy/MM/dd HH:mm");
+        dto.setDiyTime(new Timestamp(date.getTime()));
+
         managePicService.addPic(dto);
 
-        return ResponseEntity.success("图片添加成功");
+        return null;
+    }
+
+    @RequestMapping(value = "/remove", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    ResponseEntity<?> removePic(@RequestParam(value = "id") Long id) throws Exception {
+
+        managePicService.removePic(id);
+
+        return null;
     }
 
 
