@@ -80,6 +80,25 @@
             window.location.href = "<%=request.getContextPath() %>/manage";
         }
 
+        function categorySelectChange() {
+            var category = $("#categorySelect").val();
+            $.get('/manage/subCategories', {
+                category: category
+            }, function (data) {
+                res = $.trim(data);
+                res = eval('(' + res + ')');
+                var subCategories = res.data;
+                var h = "";
+                if (subCategories != null && subCategories.length > 0) {
+                    for (var i = 0; i < subCategories.length; i++) {
+                        h += "<option value='" + subCategories[i].id + "'>" + subCategories[i].name + "</option>";
+                    }
+                }
+                $("#subCategorySelect").html(h);
+            });
+        }
+
+
     </script>
 </head>
 
@@ -116,7 +135,7 @@
 
                 <div class="form-group">
                     <label for="categorySelect">类别</label>
-                    <select class="form-control" name="category" id="categorySelect">
+                    <select class="form-control" name="category" id="categorySelect" onchange="categorySelectChange()">
                         <c:forEach var="category" items="${categories}">
                             <option value="<c:out value="${category.id}"/>"><c:out value="${category.name}"/></option>
                         </c:forEach>

@@ -58,6 +58,24 @@
             window.location.href = "<%=request.getContextPath() %>/manage";
         }
 
+        function categorySelectChange() {
+            var category = $("#categorySelect").val();
+            $.get('/manage/subCategories', {
+                category: category
+            }, function (data) {
+                res = $.trim(data);
+                res = eval('(' + res + ')');
+                var subCategories = res.data;
+                var h = "";
+                if (subCategories != null && subCategories.length > 0) {
+                    for (var i = 0; i < subCategories.length; i++) {
+                        h += "<option value='" + subCategories[i].id + "'>" + subCategories[i].name + "</option>";
+                    }
+                }
+                $("#subCategorySelect").html(h);
+            });
+        }
+
     </script>
 </head>
 
@@ -96,23 +114,20 @@
 
                 <div class="form-group">
                     <label for="categorySelect">类别</label>
-                    <select class="form-control" name="category" id="categorySelect">
-                        <option value="1"></option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select class="form-control" name="category" id="categorySelect" onchange="categorySelectChange()">
+                        <c:forEach var="category" items="${categories}">
+                            <option value="<c:out value="${category.id}"/>" <c:if test="${pic.category == category.id}"> selected="selected"</c:if> ><c:out value="${category.name}"/></option>
+                        </c:forEach>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="subCategorySelect">子类别</label>
                     <select class="form-control" name="subCategory" id="subCategorySelect">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <c:forEach var="subCategory" items="${subCategories}">
+                            <option value="<c:out value="${subCategory.id}"/>" <c:if test="${pic.subCategory == subCategory.id}"> selected="selected"</c:if> ><c:out
+                                    value="${subCategory.name}"/></option>
+                        </c:forEach>
                     </select>
                 </div>
 
@@ -128,7 +143,8 @@
                 <button type="button" class="btn btn-success active btn-default" onclick="editPic()">提交</button>
             </div>
 
-            <div style="text-align:center;"><img id="newImage" width="1150" class="img-thumbnail" src="/pic/<c:out value="${pic.url}"/>"></div>
+            <div style="text-align:center;"><img id="newImage" width="1150" class="img-thumbnail"
+                                                 src="/pic/<c:out value="${pic.url}"/>"></div>
             <br>
         </div>
     </div>

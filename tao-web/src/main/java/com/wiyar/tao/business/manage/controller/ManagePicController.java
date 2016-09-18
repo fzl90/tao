@@ -118,9 +118,7 @@ public class ManagePicController extends WebApiBaseController {
     public
     @ResponseBody
     ResponseEntity<?> removePic(@RequestParam(value = "id") Long id) throws Exception {
-
         managePicService.removePic(id);
-
         return null;
     }
 
@@ -147,6 +145,14 @@ public class ManagePicController extends WebApiBaseController {
             e.printStackTrace();
         }
         return ResponseEntity.success(targetFileName);
+    }
+
+    @RequestMapping(value = "/subCategories", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    ResponseEntity<?> getSubCategories(@RequestParam(value = "category") Integer category) throws Exception {
+        List<SubCategory> subCategories = CategoryConstant.getSubCategories(category);
+        return ResponseEntity.success(subCategories);
     }
 
 }
