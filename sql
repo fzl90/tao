@@ -1,0 +1,20 @@
+CREATE TABLE `pic` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(100) NOT NULL DEFAULT '''''' COMMENT '名称',
+  `url` varchar(200) NOT NULL DEFAULT '''''' COMMENT '图片url',
+  `category` int(11) NOT NULL DEFAULT '0' COMMENT '类别',
+  `sub_category` int(11) NOT NULL DEFAULT '0' COMMENT '子类别',
+  `width` bigint(11) NOT NULL DEFAULT '0' COMMENT '宽度',
+  `height` bigint(11) NOT NULL DEFAULT '0' COMMENT '高度',
+  `diy_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '自定义时间',
+  `remark` varchar(500) NOT NULL DEFAULT '''''' COMMENT '备注',
+  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  `is_active` tinyint(11) NOT NULL DEFAULT '1' COMMENT '是否生效',
+  PRIMARY KEY (`id`),
+  KEY `index_category` (`category`),
+  KEY `index_sub_category` (`sub_category`),
+  KEY `index_diy_time` (`diy_time`),
+  KEY `index_create_time` (`create_time`),
+  KEY `index_update_time` (`update_time`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
