@@ -25,6 +25,7 @@
         <property name="locations">
             <list>
                 <value>classpath:database.properties</value>
+                <value>classpath:common.properties</value>
             </list>
         </property>
         <property name="fileEncoding" value="UTF-8"/>
