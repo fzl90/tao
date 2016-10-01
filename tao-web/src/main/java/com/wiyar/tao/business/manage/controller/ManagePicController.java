@@ -14,6 +14,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -127,13 +128,14 @@ public class ManagePicController extends WebApiBaseController {
     @ResponseBody
     ResponseEntity<?> fileUpload(@RequestParam(value = "pic", required = false) MultipartFile file, HttpServletRequest request) throws Exception {
 
-        String path = request.getSession().getServletContext().getRealPath("pic");
+
+        String picPath = request.getServletContext().getRealPath("/pic");
         String fileName = file.getOriginalFilename();
         String suffix = fileName.substring(fileName.lastIndexOf("."));
         String uuid = UUID.randomUUID().toString();
         String targetFileName = uuid + suffix;
 
-        File targetFile = new File(path, targetFileName);
+        File targetFile = new File(picPath, targetFileName);
         if (!targetFile.exists()) {
             targetFile.mkdirs();
         }
