@@ -63,8 +63,7 @@
             $.get('/manage/subCategories', {
                 category: category
             }, function (data) {
-                res = $.trim(data);
-                res = eval('(' + res + ')');
+                var res = eval('(' + $.trim(data) + ')');
                 var subCategories = res.data;
                 var h = "";
                 if (subCategories != null && subCategories.length > 0) {

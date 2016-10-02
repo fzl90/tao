@@ -47,8 +47,7 @@
                 url: '/manage/upload',
                 data: '',
                 success: function (data) {
-                    res = $.trim(data);
-                    res = eval('(' + res + ')');
+                    var res = eval('(' + $.trim(data) + ')');
                     $('#newImage').attr("src", "/pic/" + res.data);
                     $('#newImage').show();
                     $('#urlInput').attr("value", res.data);
@@ -85,8 +84,7 @@
             $.get('/manage/subCategories', {
                 category: category
             }, function (data) {
-                res = $.trim(data);
-                res = eval('(' + res + ')');
+                var res = eval('(' + $.trim(data) + ')');
                 var subCategories = res.data;
                 var h = "";
                 if (subCategories != null && subCategories.length > 0) {

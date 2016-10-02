@@ -13,10 +13,10 @@
     <title>nanuku</title>
     <link href="http://localhost:8080/favicon.ico" rel="SHORTCUT ICON">
 
-    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/js_css/zzsc.css"/>
+    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/js_css/pbl.css"/>
 
     <script src="<%=request.getContextPath() %>/jquery/jquery-1.7.2.min.js"></script>
-    <script src="<%=request.getContextPath() %>/js_css/zzsc.js"></script>
+    <script src="<%=request.getContextPath() %>/js_css/pbl.js"></script>
 
 </head>
 <body>
@@ -40,8 +40,7 @@
                 data: "pageNum=10&pageIndex="+index,
                 async: false,
                 success: function (data) {
-                    res = $.trim(data);
-                    res = eval('(' + res + ')');
+                    var res = eval('(' + $.trim(data) + ')');
                     var pics = res.data;
                     html = "";
                     for (var i = 0; i < pics.length; i++) {
