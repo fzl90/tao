@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 /**
  * Created by fuzhenglong on 16/9/16.
  */
-public class PicParam {
+public class ManagePicParam {
 
     private Long id;
     private String name;
@@ -17,7 +17,7 @@ public class PicParam {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("PicParam{");
+        final StringBuilder sb = new StringBuilder("ManagePicParam{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", url='").append(url).append('\'');

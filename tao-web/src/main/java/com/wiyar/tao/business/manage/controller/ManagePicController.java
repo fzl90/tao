@@ -4,7 +4,7 @@ import com.wiyar.tao.business.constant.Category;
 import com.wiyar.tao.business.constant.CategoryConstant;
 import com.wiyar.tao.business.constant.SubCategory;
 import com.wiyar.tao.business.manage.dto.PicReqDto;
-import com.wiyar.tao.business.manage.param.PicParam;
+import com.wiyar.tao.business.manage.param.ManagePicParam;
 import com.wiyar.tao.business.manage.service.ManagePicService;
 import com.wiyar.tao.dao.model.Pic;
 import com.wiyar.tao.framework.ResponseEntity;
@@ -14,7 +14,6 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -67,10 +66,10 @@ public class ManagePicController extends WebApiBaseController {
         Map<String, Object> params = new HashMap<String, Object>();
         Pic pic = this.managePicService.getPicById(id);
 
-        PicParam picParam = new PicParam();
-        BeanUtils.copyProperties(pic, picParam);
+        ManagePicParam managePicParam = new ManagePicParam();
+        BeanUtils.copyProperties(pic, managePicParam);
 
-        picParam.setDiyTimeStr(DateFormatUtils.format(new Timestamp(pic.getDiyTime().getTime()), "yyyy/MM/dd HH:mm"));
+        managePicParam.setDiyTimeStr(DateFormatUtils.format(new Timestamp(pic.getDiyTime().getTime()), "yyyy/MM/dd HH:mm"));
 
         //获取类别和子类别
         List<Category> categories = CategoryConstant.getCategories();
@@ -78,7 +77,7 @@ public class ManagePicController extends WebApiBaseController {
         params.put("categories", categories);
         params.put("subCategories", subCategories);
 
-        params.put("pic", picParam);
+        params.put("pic", managePicParam);
 
         return new ModelAndView("mEdit", params);
     }
@@ -86,7 +85,7 @@ public class ManagePicController extends WebApiBaseController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public
     @ResponseBody
-    ResponseEntity<?> addPic(PicParam param) throws Exception {
+    ResponseEntity<?> addPic(ManagePicParam param) throws Exception {
 
         PicReqDto dto = new PicReqDto();
         BeanUtils.copyProperties(param, dto);
@@ -102,7 +101,7 @@ public class ManagePicController extends WebApiBaseController {
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     public
     @ResponseBody
-    ResponseEntity<?> editPic(PicParam param) throws Exception {
+    ResponseEntity<?> editPic(ManagePicParam param) throws Exception {
 
         PicReqDto dto = new PicReqDto();
         BeanUtils.copyProperties(param, dto);
