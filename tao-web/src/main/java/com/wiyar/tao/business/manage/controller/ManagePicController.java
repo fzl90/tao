@@ -10,11 +10,13 @@ import com.wiyar.tao.dao.model.Pic;
 import com.wiyar.tao.framework.ResponseEntity;
 import com.wiyar.tao.framework.WebApiBaseController;
 import com.wiyar.tao.util.CollectionUtil;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -90,12 +92,14 @@ public class ManagePicController extends WebApiBaseController {
         PicReqDto dto = new PicReqDto();
         BeanUtils.copyProperties(param, dto);
 
+        Assert.hasLength(param.getDiyTimeStr(),"先填写创作时间吧");
+
         Date date = DateUtils.parseDate(param.getDiyTimeStr(), "yyyy/MM/dd HH:mm");
         dto.setDiyTime(new Timestamp(date.getTime()));
 
         managePicService.addPic(dto);
 
-        return null;
+        return ResponseEntity.success("");
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
@@ -111,7 +115,7 @@ public class ManagePicController extends WebApiBaseController {
 
         managePicService.editPic(dto);
 
-        return null;
+        return ResponseEntity.success("");
     }
 
     @RequestMapping(value = "/remove", method = RequestMethod.POST)
@@ -119,7 +123,7 @@ public class ManagePicController extends WebApiBaseController {
     @ResponseBody
     ResponseEntity<?> removePic(@RequestParam(value = "id") Long id) throws Exception {
         managePicService.removePic(id);
-        return null;
+        return ResponseEntity.success("");
     }
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)

@@ -144,7 +144,7 @@
         select
         <include refid="Base_Column_List" />
         from pic
-        where is_active = 1 order by id desc limit #{start,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
+        where is_active = 1 order by diy_time desc limit #{start,jdbcType=INTEGER},#{pageNum,jdbcType=INTEGER}
     </select>
 
 </mapper>

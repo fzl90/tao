@@ -32,7 +32,7 @@ public class IndexController {
     public ModelAndView getImages() {
 
         Map<String, Object> params = new HashMap<String, Object>();
-        List<Pic> list = this.indexPicService.queryPicPage(0,10);
+        List<Pic> list = this.indexPicService.queryPicPage(0,20);
         params.put("picList", list);
         return new ModelAndView("index",params);
     }

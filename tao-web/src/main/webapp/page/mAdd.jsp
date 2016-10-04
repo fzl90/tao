@@ -68,9 +68,14 @@
                 url: '/manage/add',
                 data: '',
                 success: function (data) {
-                    showAlert("成功啦", "success");
+                    var res = eval('(' + $.trim(data) + ')');
+                    if(res.code == 200){
+                        showAlert("成功啦", "success");
+                    }else{
+                        showAlert(res.msg, "warning");
+                    }
                 }, error: function (data) {
-                    showAlert("失败啦", "success");
+                    showAlert("失败啦", "warning");
                 }
             });
         }
