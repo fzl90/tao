@@ -6,17 +6,19 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>nanuku</title>
     <link href="http://localhost:8080/favicon.ico" rel="SHORTCUT ICON">
-
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/js_css/main.css"/>
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/js_css/pbl.css"/>
-
     <script src="<%=request.getContextPath() %>/jquery/jquery-1.7.2.min.js"></script>
     <script src="<%=request.getContextPath() %>/js_css/pbl.js"></script>
+    <script src="<%=request.getContextPath() %>/js_css/main.js"></script>
+
+
     <script>
 
         $(function () {
@@ -65,7 +67,11 @@
     <c:forEach var="pic" items="${picList}">
         <div class="cell">
             <a href="#"> <img src="/pic/<c:out value="${pic.url}" />"/></a>
-            <p><a href="http://sc.chinaz.com/jiaoben/">素材</a></p>
+            <div class="pin">
+                <p class="span-pic-name">${pic.name}</p>
+                <p class="span-pic-time"><fmt:formatDate value="${pic.diyTime}" pattern="yyyy-MM-dd"/></p>
+            </div>
+
         </div>
     </c:forEach>
 </div>
@@ -89,13 +95,21 @@
                     var pics = res.data;
                     for (var i = 0; i < pics.length; i++) {
                         var src = "/pic/" + pics[i].url;
-                        html += '<div class="cell"><a href="#"><img src="' + src + '" /></a><p>' + i + '</p></div>';
+                        html += '<div class="cell">';
+                        html += '<a href="#"><img src="' + src + '" /></a>';
+                        html += '<div  class="pin">';
+                        html += '<p class="span-pic-name">' + pics[i].name + '</p>';
+                        html += '<p class="span-pic-time">' + new Date(pics[i].diyTime).d_format('yyyy-MM-dd') + '</p>';
+                        html += '</div>';
+                        html += '</div>';
                     }
                 }
             });
             return $(html);
         },
-        column_width: 230,//列宽
+        column_width: 240,//列宽
+        column_space: 20,//列间距
+
         auto_imgHeight: true,
         insert_type: 1
     }
