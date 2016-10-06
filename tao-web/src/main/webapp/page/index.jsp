@@ -95,6 +95,7 @@
             });
             return $(html);
         },
+        column_width: 230,//列宽
         auto_imgHeight: true,
         insert_type: 1
     }

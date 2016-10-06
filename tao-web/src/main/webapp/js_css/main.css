@@ -96,7 +96,7 @@ p#back-to-top a span{
     right: 0;
     height: 48px;
     z-index: 99997;
-    background: #fff;
+    background: rgba(0,0,0,.5);
     box-shadow: 0 0 4px rgba(0, 0, 0, .2)
 }
 

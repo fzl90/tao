@@ -49,6 +49,9 @@
     }
 
     function calculateColumns() {//计算需要的列数
+        // alert(($waterfall.innerWidth()));
+        // alert(setting.column_width);
+        // alert(setting.column_space);
         var num = Math.floor(($waterfall.innerWidth()) / (setting.column_width + setting.column_space));
         if (num < 1) {
             num = 1;
