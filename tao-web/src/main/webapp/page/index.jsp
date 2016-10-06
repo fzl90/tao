@@ -43,6 +43,24 @@
 </head>
 <body>
 
+
+<div id="header" style="left: 0px;">
+    <div class="wrapper wrapper-996">
+        <div class="menu-bar">
+            <div class="left-part">
+                <a id="nanuku" href="/"></a>
+                <a href="/discovery/" class="header-item active">发现</a>
+                <a href="/all/" class="header-item ">最新</a>
+                <a href="https://muse.huaban.com/" class="header-item meisi">美思<i class="muse entrance"></i></a>
+            </div>
+            <div class="right-part">
+                <a style="display: none" href="#" onclick="return false;" class="go-mobile btn rbtn"><span class="text"> 访问移动版</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div id="waterfall">
     <c:forEach var="pic" items="${picList}">
         <div class="cell">
