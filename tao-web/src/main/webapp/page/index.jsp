@@ -22,22 +22,23 @@
     <script>
 
         $(function () {
+
+            $("#waterfall").width(Math.round($(window).width() * 5 / 6));
+
             //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
-            $(function () {
-                $(window).scroll(function () {
-                    if ($(window).scrollTop() > 100) {
-                        $("#back-to-top").fadeIn(1500);
-                    } else {
-                        $("#back-to-top").fadeOut(1500);
-                    }
-                });
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 100) {
+                    $("#back-to-top").fadeIn(1500);
+                } else {
+                    $("#back-to-top").fadeOut(1500);
+                }
+            });
 
-                //当点击跳转链接后，回到页面顶部位置
+            //当点击跳转链接后，回到页面顶部位置
 
-                $("#back-to-top").click(function () {
-                    $('body,html').animate({scrollTop: 0}, 1000);
-                    return false;
-                });
+            $("#back-to-top").click(function () {
+                $('body,html').animate({scrollTop: 0}, 1000);
+                return false;
             });
         });
 
@@ -62,12 +63,11 @@
     </div>
 </div>
 
-
 <div id="waterfall">
     <c:forEach var="pic" items="${picList}">
         <div class="cell">
-            <a href="#"> <img src="/pic/<c:out value="${pic.url}" />"/></a>
             <div class="pin">
+                <a href="#"> <img src="/pic/<c:out value="${pic.url}" />"/></a>
                 <p class="span-pic-name">${pic.name}</p>
                 <p class="span-pic-time"><fmt:formatDate value="${pic.diyTime}" pattern="yyyy-MM-dd"/></p>
             </div>
@@ -82,38 +82,38 @@
 </body>
 
 <script>
-    var opt = {
-        getResource: function (index) {
-            var html = "";
-            $.ajax({
-                type: "get",
-                url: "/pics",
-                data: "pageNum=20&pageIndex=" + index,
-                async: false,
-                success: function (data) {
-                    var res = eval('(' + $.trim(data) + ')');
-                    var pics = res.data;
-                    for (var i = 0; i < pics.length; i++) {
-                        var src = "/pic/" + pics[i].url;
-                        html += '<div class="cell">';
-                        html += '<a href="#"><img src="' + src + '" /></a>';
-                        html += '<div  class="pin">';
-                        html += '<p class="span-pic-name">' + pics[i].name + '</p>';
-                        html += '<p class="span-pic-time">' + new Date(pics[i].diyTime).d_format('yyyy-MM-dd') + '</p>';
-                        html += '</div>';
-                        html += '</div>';
+    $(function () {
+        var opt = {
+            getResource: function (index) {
+                var html = "";
+                $.ajax({
+                    type: "get",
+                    url: "/pics",
+                    data: "pageNum=20&pageIndex=" + index,
+                    async: false,
+                    success: function (data) {
+                        var res = eval('(' + $.trim(data) + ')');
+                        var pics = res.data;
+                        for (var i = 0; i < pics.length; i++) {
+                            var src = "/pic/" + pics[i].url;
+                            html += '<div class="cell">';
+                            html += '<div  class="pin">';
+                            html += '<a href="#"><img src="' + src + '" /></a>';
+                            html += '<p class="span-pic-name">' + pics[i].name + '</p>';
+                            html += '<p class="span-pic-time">' + new Date(pics[i].diyTime).d_format('yyyy-MM-dd') + '</p>';
+                            html += '</div>';
+                            html += '</div>';
+                        }
                     }
-                }
-            });
-            return $(html);
-        },
-        column_width: 240,//列宽
-        column_space: 20,//列间距
-
-        auto_imgHeight: true,
-        insert_type: 1
-    }
-    $('#waterfall').waterfall(opt);
-
+                });
+                return $(html);
+            },
+            column_width: 240,//列宽
+            column_space: 20,//列间距
+            auto_imgHeight: true,
+            insert_type: 1
+        }
+        $('#waterfall').waterfall(opt);
+    });
 </script>
 </html>
