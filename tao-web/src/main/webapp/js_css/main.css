@@ -1,42 +1,66 @@
-*{ margin:0; padding:0;}
-ul,li{ list-style:none;}
-a{ color:#666; text-decoration:none;}
-a:hover{ text-decoration:none; color:#000;}
-img{border:0 none;}
-body { font:14px/1.5 Arial; color:#666; background:#EDEDED;}
+* {
+    margin: 0;
+    padding: 0;
+}
 
+ul, li {
+    list-style: none;
+}
+
+a {
+    color: #666;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+img {
+    border: 0 none;
+}
+
+body {
+    font: 14px/1.5 Arial;
+    color: #666;
+    background: #EDEDED;
+}
 
 /*returnTop*/
-p#back-to-top{
-    position:fixed;
-    display:none;
-    bottom:100px;
-    right:80px;
+p#back-to-top {
+    position: fixed;
+    display: none;
+    bottom: 100px;
+    right: 80px;
 }
-p#back-to-top a{
-    text-align:center;
-    text-decoration:none;
-    color:#d1d1d1;
-    display:block;
-    width:64px;
+
+p#back-to-top a {
+    text-align: center;
+    text-decoration: none;
+    color: #d1d1d1;
+    display: block;
+    width: 64px;
     /*使用CSS3中的transition属性给跳转链接中的文字添加渐变效果*/
-    -moz-transition:color 1s;
-    -webkit-transition:color 1s;
-    -o-transition:color 1s;
+    -moz-transition: color 1s;
+    -webkit-transition: color 1s;
+    -o-transition: color 1s;
 }
-p#back-to-top a:hover{
-    color:#979797;
+
+p#back-to-top a:hover {
+    color: #979797;
 }
-p#back-to-top a span{
-    border-radius:6px;
-    display:block;
-    height:64px;
-    width:56px;
-    margin-bottom:5px;
+
+p#back-to-top a span {
+    border-radius: 6px;
+    display: block;
+    height: 64px;
+    width: 56px;
+    margin-bottom: 5px;
     /*使用CSS3中的transition属性给<span>标签背景颜色添加渐变效果*/
-    -moz-transition:background 1s;
-    -webkit-transition:background 1s;
-    -o-transition:background 1s;
+    -moz-transition: background 1s;
+    -webkit-transition: background 1s;
+    -o-transition: background 1s;
 }
 
 /*header相关*/
@@ -79,7 +103,6 @@ p#back-to-top a span{
     text-align: center
 }
 
-
 .menu-bar .left-part {
     float: left;
     margin-top: 10px
@@ -89,6 +112,7 @@ p#back-to-top a span{
     float: right;
     margin-left: 20px
 }
+
 #nanuku {
     float: left;
     margin-right: 20px;
@@ -104,7 +128,7 @@ p#back-to-top a span{
     right: 0;
     height: 48px;
     z-index: 99997;
-    background: rgba(0,0,0,.7);
+    background: rgba(0, 0, 0, .7);
     box-shadow: 0 0 4px rgba(0, 0, 0, .2)
 }
 
@@ -134,16 +158,121 @@ p#back-to-top a span{
     background-color: #fff;
 }
 
-.span-pic-name{
+.span-pic-name {
     text-align: left;
     padding: 10px 0 2px 16px;
     font-size: 14px;
     font-weight: bold;
     color: #444;
 }
-.span-pic-time{
+
+.span-pic-time {
     text-align: left;
     padding: 2px 0 2px 16px;
     font-size: 12px;
     color: #999;
+}
+
+#pin_view_layer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(229, 229, 229, .95);
+    z-index: 99994;
+    overflow: auto;
+    padding-top: 40px
+}
+
+#pin_view_layer .pin-view {
+    width: 992px;
+    margin: 0 auto
+}
+
+#pin_view_layer .close-layer {
+    width: 56px;
+    height: 56px;
+    position: fixed;
+    right: 14px;
+    top: 0;
+    cursor: pointer;
+    z-index: 99995
+}
+
+#pin_view_layer .close-layer i {
+    background: url(/img/btn_close_layer.png) 0 0 no-repeat;
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -18px 0 0 -18px
+}
+
+#pin_view_layer .close-layer:hover i {
+    background-position: 0 -50px
+}
+
+.pin-view .pin-view-wrapper {
+    width: 800px;
+    margin: 0 auto;
+    position: relative
+}
+
+.pin-view .pin-view-wrapper:after {
+    content: "";
+    clear: both;
+    display: table
+}
+
+.pin-view .piece {
+    background: #fff;
+    padding: 16px 20px;
+    box-shadow: 0 1px 3px rgba(34, 25, 25, .4);
+    margin-bottom: 16px
+}
+
+.pin-view .main-part {
+    width: 800px;
+    float: left
+}
+
+.pin-view .side-part {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.menu-bar .menu-nav {
+    position: relative;
+    float: left;
+    margin-right: 20px;
+    width: 24px;
+    height: 28px;
+    background: url(/img/menu_sprite.svg?20150302) 0 -248px no-repeat;
+    cursor: pointer;
+}
+
+.header-main-menu {
+    z-index: 1;
+    background: #fff;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .2);
+    position: absolute;
+    left: -128px;
+    top: 50px;
+    width: 270px;
+    padding: 20px 20px 0;
+    text-align: left;
+    display: none;
+    cursor: default
+}
+
+.up-arrow {
+    width: 18px;
+    height: 10px;
+    position: absolute;
+    left: 131px;
+    top: -9px;
+    background: url(/img/menu_arrow.png) 0 0 no-repeat
 }
