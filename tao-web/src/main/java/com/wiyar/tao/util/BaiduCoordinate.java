@@ -100,8 +100,8 @@ public class BaiduCoordinate {
 
     public static void main(String[] args) {
         System.out.println(convertMC2LL(13405855.99,4298387.95));
+        System.out.println("111");
     }
 }
 
 
-1
